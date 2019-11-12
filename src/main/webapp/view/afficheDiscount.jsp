@@ -20,14 +20,14 @@
                 <input type="hidden" name="action" value="ADD">
                 <input type="submit" value="Ajouter">
         </form>
-        
+        <p>${message}</p>
         <table border="1">
             <tr><td>Code</td><td>Taux</td><td>Action</td></tr>
             <c:forEach var="dc" items="${Discount}">
                 <tr>
                     <form method='post'>
-                        <td>"${dc.discount_code}"</td>
-                        <td>"${dc.rate}"</td>
+                        <td>${dc.discount_code}</td>
+                        <td>${dc.rate}</td>
                         <td><input type="hidden" name="action" value="DEL">
                             <input type="hidden" name="DC" value="${dc.discount_code}">
                             <input type="submit" name="delete" value="Delete"/></td>

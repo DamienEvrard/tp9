@@ -53,13 +53,27 @@ public class discount_Code_Controlleur extends HttpServlet {
                 
                 String bouton =request.getParameter("action").toString();
                 if(bouton.equals("DEL")){
-                    System.out.println("_____________________________");
-                    System.out.println(request.getParameter("DC").toString()+"__________");
-                    dao.deleteDiscountCode(request.getParameter("DC").toString());
+                    int ok=dao.deleteDiscountCode(request.getParameter("DC").toString());
+                    String message;
+                    if(ok==1){
+                        message="Le code "+request.getParameter("DC").toString()+" a ete supprime";
+                        request.setAttribute("message", message);
+                    }else{
+                       message="Le code "+request.getParameter("DC").toString()+" ne peut pas etre supprime"; 
+                       request.setAttribute("message", message);
+                    }
                 }else{
                     String DC=request.getParameter("code").toString();
                     Float rate =Float.parseFloat(request.getParameter("taux").toString());
-                    dao.addDiscountCode(DC, rate);
+                    int ok=dao.addDiscountCode(DC, rate);
+                    String message;
+                    if(ok==1){
+                        message="Le code "+request.getParameter("code").toString()+" a ete ajoute";
+                        request.setAttribute("message", message);
+                    }else{
+                       message="Le code "+request.getParameter("code").toString()+" n'a pas pu etre ajoute"; 
+                       request.setAttribute("message", message);
+                    }
                 }
                 
                 String jspView;

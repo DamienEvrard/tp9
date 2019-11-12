@@ -52,27 +52,27 @@ public class discountDAO {
 		return result;
     }
     
-    public void addDiscountCode(String DC, Float rate){
+    public int addDiscountCode(String DC, Float rate){
         String sql = "insert into DISCOUNT_CODE(DISCOUNT_CODE,RATE) values(?,?)";
         try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
 			PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, DC);
             stmt.setFloat(2, rate);
             
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
         }  catch (Exception ex) {
-                    
+             return 0;       
         }
     }
     
-    public void deleteDiscountCode(String DC){
+    public int deleteDiscountCode(String DC){
         String sql = "DELETE FROM DISCOUNT_CODE WHERE DISCOUNT_CODE = ?";
         try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
 			PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, DC);
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
         }  catch (Exception ex) {
-                    
+              return 0;      
 	}
     }
     
